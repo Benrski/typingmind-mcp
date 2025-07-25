@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image (slim variant for better security)
-FROM node:23-alpine
+FROM node:23-slim
 
 
 # Add Docker's official GPG key:
