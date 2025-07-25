@@ -3,8 +3,7 @@ FROM node:22-alpine
 
 
 # Install Python, pip, and other dependencies
-RUN apk add --no-cache python3 python3-pip docker-cli && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache python3 py3-pip docker-cli
 
 # Install uv via pip
 RUN pip3 install uv --break-system-packages 
