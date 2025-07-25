@@ -1,10 +1,21 @@
 # Use an official Node.js runtime as a parent image (slim variant for better security)
-FROM node:23-slim
+FROM node:23-alpine
 
+
+# Add Docker's official GPG key:
+RUN apt-get update && \
+    apt-get install ca-certificates curl && \
+    install -m 0755 -d /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
+    chmod a+r /etc/apt/keyrings/docker.asc && \
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install Python, pip, and other dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
+    apt-get install -y python3 python3-pip docker-ce-cli && \
     rm -rf /var/lib/apt/lists/*
 
 # Install uv via pip
